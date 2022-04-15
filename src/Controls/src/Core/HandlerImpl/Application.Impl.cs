@@ -43,6 +43,7 @@ namespace Microsoft.Maui.Controls
 
 				if (_singleWindowMainPage != null && window.Page != null && window.Page != _singleWindowMainPage)
 					throw new InvalidOperationException($"Both {nameof(MainPage)} was set and {nameof(Application.CreateWindow)} was overridden to provide a page.");
+				_singleWindowMainPage = null;
 			}
 
 			// make sure it is added to the windows list
@@ -82,8 +83,8 @@ namespace Microsoft.Maui.Controls
 				windowElement.Parent = null;
 				OnChildRemoved(windowElement, oldIndex);
 
-				if (_singleWindowMainPage != null)
-					window.Page = null;
+				window.Page = null;
+					
 			}
 
 			_windows.Remove(window);
